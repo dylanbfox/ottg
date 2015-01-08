@@ -11,7 +11,7 @@ class NewVisitorTest(unittest.TestCase):
 		# browser will wait 3 seconds before trying anything
 		# to help guarantee everything has loaded before
 		# continuing to test
-		self.browser.implicity_wait(3)
+		self.browser.implicitly_wait(3)
 
 	# special method; gets called after each test
 	# even if there is an error in the test
