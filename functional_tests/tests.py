@@ -1,10 +1,12 @@
+from django.test import LiveServerTestCase
+
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import unittest
 
 # Tests are organized into classes, which inherit 
 # from unittest.TestCase 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 
 	# special method; gets called before each test
 	def setUp(self):
@@ -31,7 +33,7 @@ class NewVisitorTest(unittest.TestCase):
 
 	# nice descriptive names are a good idea
 	def test_can_start_a_list_and_retrieve_it_later(self):
-		self.browser.get('http://localhost:8000')
+		self.browser.get(self.live_server_url)
 		# special assert function provided by unittest
 		self.assertIn('To-Do', self.browser.title)
 		header_text = self.browser.find_element_by_tag_name('h1').text
@@ -59,12 +61,3 @@ class NewVisitorTest(unittest.TestCase):
 		# fails no matter what, producing the error message given.
 		# using it as a reminder here to finish the tests!
 		self.fail('Finish the test!')
-
-# This is how a Python script checks if it's been
-# executed from the command line, rather than just imported
-# by another script
-if __name__ == '__main__':
-	# launches the unittest test runner, which will
-	# automatically find test classes and methods in the file
-	# and run them
-	unittest.main()
