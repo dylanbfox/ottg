@@ -21,6 +21,29 @@ class NewVisitorTest(LiveServerTestCase):
 	def tearDown(self):
 		self.browser.quit()
 
+	def test_layout_and_styling(self):
+		# Edith goes to the home page
+		self.browser.get(self.live_server_url)
+		self.browser.set_window_size(1024, 768)
+
+		# She notices the input box is nicely centered
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		self.assertAlmostEqual(
+			inputbox.location['x'] + inputbox.size['width'] / 2,
+			512,
+			delta=15,
+		)
+
+		# she starts a new list and sees the input is nicely centered
+		# there too
+		inputbox.send_keys('testing\n') # \n == ENTER; submits POST
+		inputbox = self.browser.find_element_by_id('id_new_item')
+		self.assertAlmostEqual(
+			inputbox.location['x'] + inputbox.size['width'] / 2,
+			512,
+			delta=15,
+		)
+
 	def check_for_row_in_list_table(self, row_text):
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
