@@ -20,11 +20,11 @@ BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 SECRET_KEY = '4(c8!az15xe9vbl)($!nepn6a!dj%#joux$d&-u(l&%y(7o)p3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ottg-stage.dylanbfox.com']
 
 
 # Application definition
