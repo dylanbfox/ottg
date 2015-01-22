@@ -16,7 +16,6 @@ class ItemFormTest(TestCase):
 		self.assertEqual(new_item.text, 'do me')
 		self.assertEqual(new_item.list, list_)
 
-
 	def test_form_validation_for_blank_items(self):
 		form = ItemForm(data={'text': ''})
 		self.assertFalse(form.is_valid())
@@ -32,6 +31,12 @@ class ItemFormTest(TestCase):
 		self.assertIn('class="form-control input-lg"', form.as_p())
 
 class ExistingListItemFormTest(TestCase):
+
+	def test_form_save(self):
+		list_ = List.objects.create()
+		form = ExistingListItemForm(for_list=list_, data={'text': 'hi'})
+		new_item = form.save()
+		self.assertEqual(new_item, Item.objects.all()[0])
 
 	def test_form_validation_for_blank_items(self):
 		list_ = List.objects.create()
